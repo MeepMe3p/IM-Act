@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="stylez.css">
+    <link rel="stylesheet" href="tables.css">
 
     <title>Restaurant</title>
 </head>
@@ -19,31 +19,30 @@
 			<a href="#">Contact Us</a>
 			<a href="#">About Us</a>
             <a href="AccountSettings.php">Account</a>
-            <a href="CustomerLocations.php">Customers near you</a>
+            <a href="LocalRestaurants.php">Restaurants near you</a>
 		</nav>
 	</header>
 		
     <?php
         $username = $_COOKIE['UserName'];
-        echo "<h1> Restaurants in Cebu</h1>";
+        echo "<h1> Customers who ordered French Fries</h1>";
 
-        $sql = "SELECT tblrestaurant.restaurant_name as name, tbluseraccount.username as owner, tblrestaurant.restaurant_address as location FROM tblrestaurant INNER JOIN tbluseraccount 
-        WHERE tblrestaurant.restaurant_address='Cebu' AND tbluseraccount.acctid=tblrestaurant.restaurant_owner";
-
+        $sql = "SELECT COUNT(*) as number_of_orders, customerid,
+        tbluserprofile.firstname as fname, tbluserprofile.lastname as lname,tblorder.Food as food
+        FROM tblorder JOIN tbluserprofile ON tblorder.customerid = tbluserprofile.userid WHERE tblorder.Food = 'French Fries'
+        GROUP BY customerid";
         $result = $connection->query($sql);
 
         echo "<table border='1'>";
-        // Table header
-        echo "<tr><th>Restaurant Name</th><th>Restaurant Owner</th><th>Restaurant Address</th></tr>";
-        // Output data of each row
+        echo "<tr><th>Number of Orders</th><th>Customer First Name</th><th>Customer Last Name</th>><th>Food Ordered</th></tr>";
         while($row = $result->fetch_assoc()) {
-            echo "<tr><td>".$row["name"]."</td><td>".$row["owner"]."</td><td>".$row["location"]."</td>";
+            echo "<tr><td>".$row["number_of_orders"]."</td><td>".$row["fname"]."</td><td>".$row["lname"]."</td><td>".$row["food"]."</td>";
         }
-        // End table HTML
         echo "</table> User type: ".$_COOKIE['UserType'];
     ?>
     
     <footer>
+        <p>Elijah Rei Sabay</p>
         <p>Kevin Josh Atay</p>
         <p>BSCS-2</p>
     </footer>

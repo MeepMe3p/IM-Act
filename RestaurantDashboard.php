@@ -44,6 +44,7 @@
         }
         // End table HTML
         echo "</table> User type: ".$_COOKIE['UserType'];
+
     ?>
     
     <footer>

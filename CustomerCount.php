@@ -18,8 +18,8 @@
 			<a href="logout.php">Log Out</a>
 			<a href="Contact Us.html">Contact Us</a>
 			<a href="#">About Us</a>
+            <a href="UserDashboard.php">User Dashboard  </a>
             <a href="AccountSettings.php">Account</a>
-            <a href="#">Customer Orders</a>
 		</nav>
 	</header>
 		
@@ -37,7 +37,7 @@
         FROM tblorder 
         INNER JOIN tbluserprofile ON tblorder.customerid = tbluserprofile.userid 
         GROUP BY customerid 
-        HAVING Number_of_orders > 4";
+        HAVING Number_of_orders >= 1";
 
         $result = $connection->query($sql);
 
@@ -50,12 +50,11 @@
         }
     ?>
     
+    
     <footer>
         <p>Elijah Rei Sabay</p>
-        <p>BSCS-2</p>
         <p>Kevin Josh Atay</p>
         <p>BSCS-2</p>
     </footer>
-    
 </body>
 </html>

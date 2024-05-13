@@ -4,60 +4,91 @@
     ?>
     <head>
 		<title>FoodBear</title>
+		<link rel="stylesheet" href="stylezz.css">
+
 	</head>
 	
 	<body>
 		<header>
-			<nav>
-				<a href="index.html"><img src="foodbear.png" style="max-width: 100px;max-width: 10
-				0px"></a>
-				<a href="#">Register </a>
-				<a href="login.php">Log In</a>
-				<a href="Contact Us.html">Contact Us</a>
-				<a href="#">About Us</a>
-			</nav>
+			<!-- <div class="nav-bar"> -->
+				<nav>
+					<a href="index.html"><img src="foodbear.png" style="max-width: 100px;max-width: 10
+					0px"></a>
+					<a href="#">Register </a>
+					<a href="login.php">Log In</a>
+					<a href="Contact Us.html">Contact Us</a>
+					<a href="#">About Us</a>
+				</nav>
+			<!-- </div> -->
+
 		</header>
-		
-		<h1> Register </h1>
-		<div id="Content" style="border: 2px solid black; padding: 25px">
-			<form method="POST">
-				<h2>Account</h2>
-				<label for="email">Email:</label><br>
-				<input type="text" id="email" name="email"><br>
-				<label for="Username">Username:</label><br>
-				<input type="text" id="Username" name="Username"><br>
-				<label for="password">Password:</label><br>
-				<input type="text" id="password" name="password"><br>
-                <p>Select User Type:</p>
-				<input type="radio" name="UserType" value="customer" onclick="DisplayCustomerForm()">Customer</button>
-				<input type="radio" name="UserType" value="restaurant" onclick="DisplayRestaurantForm()">Restaurant</button><br><br>
 
-				<div id="CustomerForm" style="display:none">
-					<h2>Customer</h2>
-					<label>First Name</label>
-					<input type="text" name='fname' placeholder="Enter first name"><br>
-					<label>Last Name</label>
-					<input type="text" name='lname' placeholder="Enter last name"> <br>
-				</div>
+		<div class="login-container">
+			<div class="form-box">
+				<h1> Register </h1>
+				<form method="POST" id = "login-form">
+					<!-- <h2>Account</h2> -->
+					<div class="input-group">
+						<div class="input-field">
+                       		<i class="fa-solid fa-lock"></i>
+							<input type="text" id="email" name="email" placeholder = "Enter Email">
+						</div>
+						<div class="input-field">
+                       		<i class="fa-solid fa-lock"></i>
+							<input type="text" id="Username" name="Username" placeholder = "Enter Username"><br>
+						</div>
+						<div class="input-field">
+                       		<i class="fa-solid fa-lock"></i>
+							<input type="password" id="password" name="password" placeholder = "Enter Password"><br>
+						</div>
+						<div class="input-field">
+							<p>Select User Type:</p>
+							<input type="radio" name="UserType" value="customer" onclick="DisplayCustomerForm()">Customer</button>
+							<input type="radio" name="UserType" value="restaurant" onclick="DisplayRestaurantForm()">Restaurant</button><br><br>
+						</div>
 
-				<div id="RestaurantForm" style="display:none">
-					<h2>Restaurant</h2>
-					<label>Restaurant Name</label>
-					<input type="text" name='rname' placeholder="Enter Restaurant name"><br>
-					
-				</div>
+						<div id="CustomerForm" style="display:none">
+							<h2>Customer</h2>
+							<div class="input-field">
+								<i class="fa-solid fa-lock"></i>
+								<input type="text" name='fname' placeholder="Enter first name"><br>
+							</div>
+							<div class="input-field">
+								<i class="fa-solid fa-lock"></i>
+								<input type="text" name='lname' placeholder="Enter last name"> <br>
+							</div>
+						</div>
+						<div id="RestaurantForm" style="display:none">
+							<h2>Restaurant</h2>
+							<!-- <label>Restaurant Name</label> -->
+							<div class="input-field">
+								<i class="fa-solid fa-lock"></i>
+								<input type="text" name='rname' placeholder="Enter Restaurant name"><br>
+							</div>
+						</div>
+						<div class="input-field">
+							<i class="fa-solid fa-lock"></i>
+							<input type="text" name='address' placeholder="Enter Address"> <br>
+						</div>
+						<div class="input-field">
+							<i class="fa-solid fa-lock"></i>
+							<input type="text" name="ContactNum" placeholder="Enter Contact Number"><br>
+						</div>
+					</div>
 
-				<label>Address</label>
-				<input type="text" name='address' placeholder="Enter Address"> <br>
-				<label>Contact Number</label>
-				<input type="text" name="ContactNum" placeholder="Enter Contact Number"><br>
+					<div class="btn-field">
+						<input type="submit" name="btnRegister" value="Register" class = "input">
+					</div>
+				</form>
 
-				<input type="submit" name="btnRegister" value="Register">
-			</form>
+			</div>
 		</div>
+		
+	
 		
 		<footer style="margin-top: 10px">
 			Kevin Josh Atay <br>
+			Elijah Rei Sabay <br>
 			BSCS - 2
 		</footer>
 	</body>
@@ -67,19 +98,29 @@
 function DisplayCustomerForm() {
   var x = document.getElementById("CustomerForm");
   var y = document.getElementById("RestaurantForm");
+  var formBox = document.querySelector('.form-box');
+
   if (x.style.display === "none") {
     x.style.display = "block";
 	y.style.display = "none";
+	formBox.style.height = "auto"; 
+  } else {
+    formBox.style.height = "calc(50% + 150px)"; // Adjust height when hiding customer form
   }
 }
 
 function DisplayRestaurantForm() {
 	var x = document.getElementById("CustomerForm");
 	var y = document.getElementById("RestaurantForm");
+	var formBox = document.querySelector('.form-box');
+
 	if (y.style.display === "none") {
 		y.style.display = "block";
 		x.style.display = "none";
-	}
+		formBox.style.height = "auto"; // Reset height to auto when displaying restaurant form
+  } else {
+    formBox.style.height = "calc(50% + 150px)"; // Adjust height when hiding restaurant form
+  }
 }
 </script>
 
