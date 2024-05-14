@@ -26,7 +26,7 @@
                 <a href="register.php">Register </a>
                 <a href="login.php">Log In</a>
                 <a href="Contact Us.html">Contact Us</a>
-                <a href="#">About Us</a>
+                <a href="Report.php">Report</a>
             </nav>
         </div>
 	</header>

@@ -22,14 +22,6 @@
 
         echo "<h1> Customer id: $customerid</h1>";
 
-        // $sql = "SELECT id, product, quantity FROM orders WHERE user_id = "; // Assuming orders table has user_id column
-
-        // Assuming $userId is the ID of the logged-in user
-        // $userId = 123; // Replace with your actual user ID
-
-        // $stmt = $conn->prepare($sql);
-        // $stmt->bind_param("i", $userId);
-        // $stmt->execute();
         echo "<table>";
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
