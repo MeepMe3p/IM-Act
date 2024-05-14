@@ -17,7 +17,7 @@
 			<a href="register.php">Register </a>
 			<a href="logout.php">Log Out</a>
 			<a href="Contact Us.html">Contact Us</a>
-			<a href="#">Order</a>
+			<a href="updateDeleteOrder.php">Change Order</a>
             <a href="AccountSettings.php">Account</a>
             <a href="CustomerCount.php">Customer Orders</a>
 		</nav>
@@ -59,7 +59,7 @@
 						alert('New record saved.');
 				  </script>";
                 
-                $OrderQuery = "INSERT INTO tblorder (totalAmount, customerid, Food) VALUES ('$price','$customerid', '$food')";
+                $OrderQuery = "INSERT INTO tblorder (totalAmount, customerid, Food,status) VALUES ('$price','$customerid', '$food','1')";
                 $connection->query($OrderQuery);
             }
         }
