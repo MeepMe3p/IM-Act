@@ -1,5 +1,5 @@
 <?php
-    $connection = new mysqli('localhost', 'root', '', 'dbsabayf3');
+    $connection = new mysqli('localhost', 'root', '', 'dbatayf3');
     
     if(!$connection){
         die(mysqli_error($mysqli));

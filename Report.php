@@ -24,14 +24,14 @@
 
         //====== THIS PART IS WHERE SECOND TABLE IS WHICH DISPLAYS THE AVERAGE AMOUNT PURCHASED BY CUSTOMER ==========
 
-        $getID= "SELECT userid FROM tbluserprofile WHERE firstname = '$username'";
+        $getID= "SELECT acctid FROM tbluseraccount WHERE username = '$username'";
         $res = $connection->query($getID);
         $id = $res->fetch_assoc();
-        $custid = $id["userid"]; 
+        $acctid = $id["acctid"]; 
         $sql = "SELECT tbluserprofile.firstname, tbluserprofile.lastname, AVG(tblorder.totalAmount) AS avg_amount, COUNT(*) AS num_of_orders
         FROM tbluserprofile
         INNER JOIN tblorder  ON tbluserprofile.userid = tblorder.customerid
-        WHERE tbluserprofile.userid = $custid
+        WHERE tbluserprofile.acctid = $acctid
         GROUP BY tbluserprofile.userid";
         $result = $connection->query($sql);
         
@@ -49,8 +49,8 @@
         $sql = "SELECT tbluserprofile.firstname, tbluserprofile.lastname, SUM(o.totalAmount) AS total_amount,  COUNT(*) AS num_of_orders
         FROM tbluserprofile
         INNER JOIN tblorder o ON tbluserprofile.userid = o.customerid
-        WHERE tbluserprofile.userid = $custid
-        GROUP BY tbluserprofile.userid";
+        WHERE tbluserprofile.acctid = $acctid
+        GROUP BY tbluserprofile.acctid";
         $result = $connection->query($sql);
 
         echo "<table border='1'>";
@@ -68,7 +68,7 @@
         $sql = "SELECT COUNT(*) as number_of_orders, customerid,
         tbluserprofile.firstname as fname, tbluserprofile.lastname as lname,tblorder.Food as food
         FROM tblorder JOIN tbluserprofile ON tblorder.customerid = tbluserprofile.userid WHERE tblorder.Food = 'French Fries' AND
-        tbluserprofile.firstname = '$username'
+        tbluserprofile.acctid = '$acctid'
         GROUP BY customerid";
 
         // Prepare and bind
@@ -87,7 +87,7 @@
 
         $sql = "SELECT tbluserprofile.firstname as name, tbluserprofile.lastname as lname, tblorder.Food as ordered FROM tbluserprofile INNER JOIN tblorder 
         ON tblorder.customerid = tbluserprofile.userid 
-        WHERE tblorder.Food ='French Fries' AND tblorder.status = '1'";
+        WHERE tblorder.Food ='French Fries'";
 
         $result = $connection->query($sql);
 
@@ -104,7 +104,7 @@
 
         echo "<h2> Total Number of Orders per Customer</h2>";
 
-        $getCustomerID = "SELECT userid FROM tbluserprofile WHERE acctid='".$custid."'";
+        $getCustomerID = "SELECT userid FROM tbluserprofile WHERE acctid='".$acctid."'";
         $result = mysqli_query($connection, $getCustomerID);
         $row = mysqli_fetch_assoc($result);
         // $customerid = $row['userid'];
@@ -144,6 +144,42 @@
             echo "<tr><td>".$row["name"]."</td><td>".$row["owner"]."</td><td>".$row["location"]."</td>";
         }
         // End table HTML
+        echo "</table>";
+
+        //
+        echo "<h2>Total number users grouped by user type</h2>
+        <img src='Images/pie1.PNG'>";
+        
+
+        $sql = "SELECT userType, COUNT(userType) as UTcount
+        FROM tbluseraccount
+        GROUP BY userType";
+
+        $result = $connection->query($sql);
+        echo "<table border='1'>";
+        // Table header
+        echo "<tr><th>userType</th><th>Count</th></tr>";
+        // Output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo "<tr><td>".$row["userType"]."</td><td>".$row["UTcount"]."</td>";
+        }
+        echo "</table>";
+
+        echo "<h2>Most Ordered Food Overall</h2>
+        <img src='Images/pie3.PNG'>";
+
+        $sql = "SELECT Food, COUNT(Food) as Fcount
+        FROM tblorder
+        GROUP BY Food";
+
+        $result = $connection->query($sql);
+        echo "<table border='1'>";
+        // Table header
+        echo "<tr><th>Food</th><th>Count</th></tr>";
+        // Output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo "<tr><td>".$row["Food"]."</td><td>".$row["Fcount"]."</td>";
+        }
         echo "</table>";
         $connection->close();
     }

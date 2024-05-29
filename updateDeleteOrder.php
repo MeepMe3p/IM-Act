@@ -30,9 +30,9 @@
             <input type='radio' name = 'Price' value = '500'> <label >P 300 Potato Chips</label><br>
             <input type='radio' name = 'Price' value = '700'> <label >P 700 Potato Caviar</label><br>
             ");
-            $username = $_COOKIE['UserName'];
+            $acctid = $_COOKIE['UserID'];
 
-            $getID= "SELECT userid FROM tbluserprofile WHERE firstname = '$username'";
+            $getID= "SELECT userid FROM tbluserprofile WHERE acctid = '$acctid'";
             $res = $connection->query($getID);
             $id = $res->fetch_assoc();
             $custid = $id["userid"]; 

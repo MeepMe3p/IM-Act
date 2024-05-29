@@ -48,6 +48,9 @@
         while($row = $result->fetch_assoc()) {
             echo "<tr><td>".$row["Number_of_orders"]."</td><td>".$row["fname"]."</td><td>".$row["lname"]."</td>";
         }
+
+        
+        
     ?>
     
     
